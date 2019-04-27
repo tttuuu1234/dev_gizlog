@@ -12,22 +12,22 @@
         <tbody>
           <tr>
             <th class="table-column">Title</th>
-            <td class="td-text"></td>
+            <td class="td-text">{{ $reportShow->title }}</td>
           </tr>
           <tr>
             <th class="table-column">Content</th>
-            <td class='td-text'></td>
+            <td class='td-text'>{{ $reportShow->contents }}</td>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
   <div class="btn-bottom-wrapper">
-    <a class="btn btn-edit" href=""><i class="fa fa-pencil" aria-hidden="true"></i></a>
+    <a class="btn btn-edit" href="{{ route('daily.edit', $reportShow->user_id) }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
     <div class="btn-delete">
-      <form>
+      {!! Form::open(['route' => ['daily.destroy', $reportShow->user_id], 'method' => 'delete']) !!}
         <button class="btn btn-danger" type="submit"><i class="fa fa-trash-o"></i></button>
-      </form>
+      {!!Form::close()!!}
     </div>
   </div>
 </div>
