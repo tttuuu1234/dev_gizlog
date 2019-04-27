@@ -67,6 +67,7 @@ class DailyReportsController extends Controller
     {
         //
         $reportShow = $this->dailyReport->find($id);
+        $reportShow['user_id'] = Auth::id();        
         // dd($reportShow);
         return view('user.daily_report.show', compact('reportShow'));
     }
@@ -80,8 +81,8 @@ class DailyReportsController extends Controller
     public function edit($id)
     {
         //
-        $reportShow = $this->dailyReport->find($id);
-        return view('user.daily_report.edit', compact('reportShow'));
+        $reportEdit = $this->dailyReport->find($id);
+        return view('user.daily_report.edit', compact('reportEdit'));
     }
 
     /**
@@ -94,6 +95,9 @@ class DailyReportsController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $input = $request->all();
+        $reportUpdate = $this->dailyReport->find($id)->fill($input)->save();
+        return redirect()->route('daily.index');
     }
 
     /**
@@ -105,5 +109,8 @@ class DailyReportsController extends Controller
     public function destroy($id)
     {
         //
+        $dailyDelete = DailyReport::find($id); //ファサードの記法で書く DailyReportから$find()で取得したidのオブジェクトを取得
+        $dailyDelete->delete();
+        return redirect()->route('daily.index');
     }
 }

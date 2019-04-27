@@ -26,7 +26,7 @@
             <td class="col-xs-2">{{ $dailyReport->reporting_time }}</td>
             <td class="col-xs-3">{{ $dailyReport->title }}</td>
             <td class="col-xs-5">{{ $dailyReport->contents }}</td>
-            <td class="col-xs-2"><a class="btn" href="daily/{{ $dailyReport->user_id }}"><i class="fa fa-book"></i></a></td>
+            <td class="col-xs-2"><a class="btn" href="daily/{{ $dailyReport->id }}"><i class="fa fa-book"></i></a></td>
           </tr>
         @endforeach  
       </tbody>
