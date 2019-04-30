@@ -21,7 +21,7 @@ class DailyReportRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules() //コントローラーに処理が渡る前にvalidateをしてくれる　rulesでリクエスの対してのvalidateを指定
     {
         return [
             'reporting_time' => 'required|before:now',
@@ -30,7 +30,7 @@ class DailyReportRequest extends FormRequest
         ];
     }
   
-    public function messages()
+    public function messages() //表示させるメッセージ
     {
         return [
             'reporting_time.before'   => '今日以前の日付を入力してください。',

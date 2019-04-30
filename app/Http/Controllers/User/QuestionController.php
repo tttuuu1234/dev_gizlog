@@ -36,7 +36,7 @@ class QuestionController extends Controller
         $categories = $this->category->all();
         $inputs = $request->all();
 
-        if (array_key_exists('search_word', $inputs)) {
+        if (array_key_exists('search_word', $inputs)) { //search_wordキーが$inputsの配列内に含まれているか
             $questions = $this->question->fetchSearchingQuestion($inputs)->paginate(MAX_PAGE_COUNT);
         } else {
             $questions = $this->question->orderby('created_at', 'desc')->paginate(MAX_PAGE_COUNT);
@@ -63,7 +63,7 @@ class QuestionController extends Controller
     public function store(Request $request)
     {
         $inputs = $request->all();
-        $this->question->create($inputs);
+        $a = $this->question->create($inputs);
         return redirect()->route('question.index');
     }
 
