@@ -75,8 +75,6 @@ class QuestionController extends Controller
     {
         $question = $this->question->find($id);
         return view('user.question.show', compact('question'));
-        // $a = compact('question');
-        // dd($a);
     }
 
     /**
