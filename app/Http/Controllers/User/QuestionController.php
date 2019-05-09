@@ -36,7 +36,7 @@ class QuestionController extends Controller
         $categories = $this->category->all();
         $inputs = $request->all();
 
-        if (array_key_exists('search_word', $inputs)) { //search_wordキーが$inputsの配列内に含まれているか
+        if (array_key_exists('search_word', $inputs)) {
             $questions = $this->question->fetchSearchingQuestion($inputs)->paginate(MAX_PAGE_COUNT);
         } else {
             $questions = $this->question->orderby('created_at', 'desc')->paginate(MAX_PAGE_COUNT);
@@ -63,7 +63,7 @@ class QuestionController extends Controller
     public function store(Request $request)
     {
         $inputs = $request->all();
-        $a = $this->question->create($inputs);
+        $this->question->create($inputs);
         return redirect()->route('question.index');
     }
 
@@ -75,6 +75,8 @@ class QuestionController extends Controller
     {
         $question = $this->question->find($id);
         return view('user.question.show', compact('question'));
+        // $a = compact('question');
+        // dd($a);
     }
 
     /**
@@ -125,9 +127,9 @@ class QuestionController extends Controller
      * @param null $questionId
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function confirm(QuestionsRequest $request, $questionId = null)
+    public function confirm(QuestionsRequest $request, $questionId = null) //createの際に初期値としてnullを設定していないとそんな引数はないとエラー出る
     {
-        $inputs = $request->all();
+        $inputs = $request->all(); // ただの連想配列だから値を取得するには[キー名]で値にアクセス
         $category = $this->category->find($inputs['tag_category_id'])->name;
         return view('user.question.confirm', compact('inputs', 'category', 'questionId'));
     }
