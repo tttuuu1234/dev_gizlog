@@ -8,7 +8,7 @@ use App\Http\Requests\User\DailyReportRequest;
 use App\Models\DailyReport;
 use Illuminate\Support\Facades\Auth;
 
-const DAILY_MAX_PAGE_COUNT= 30; //最大30記事を1ページに表示 already defineと出てroute listが見れない
+const DAILY_MAX_PAGE_COUNT= 30; //最大30記事を1ページに表示
 
 class DailyReportsController extends Controller
 {
