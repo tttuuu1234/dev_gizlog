@@ -7,7 +7,7 @@
     {!! Form::open(['route' => ['daily.update', $reportEdit->id], 'method' => 'put'] )!!}
       <input class="form-control" name="user_id" type="hidden">
       <div class="form-group form-size-small {{ $errors->has('reporting_time')? 'has-error' : '' }}">
-        <input class="form-control " name="reporting_time" value="{{ $reportEdit->reporting_time->format('Y-m-d') }}" type="date"> <!--なぜtypeに"dateを指定したら"-から/に変わるのか-->
+        <input class="form-control " name="reporting_time" value="{{ $reportEdit->reporting_time->format('Y-m-d') }}" type="date">
       <span class="help-block">{{ $errors->first('reporting_time')}}</span>
       </div>
       <div class="form-group {{ $errors->has('title')? 'has-error' : ''}}">
