@@ -8,7 +8,7 @@ use App\Http\Requests\User\DailyReportRequest;
 use App\Models\DailyReport;
 use Illuminate\Support\Facades\Auth;
 
-const DAILY_MAX_PAGE_COUNT= 30; //最大30記事を1ページに表示
+const DAILY_MAX_PAGE_COUNT= 30;
 
 class DailyReportsController extends Controller
 {
@@ -28,16 +28,15 @@ class DailyReportsController extends Controller
 
     public function index(Request $request)
     {
-        //
-        $inputs = $request->all(); //検索条件の取得
+        $inputs = $request->all();
 
-        if (array_key_exists('search_word', $inputs)) { //search_wordキーが$inputsの配列内に含まれているか search_wordはどの段階でkeyとしてセットされているのか
+        if (array_key_exists('search_word', $inputs)) {
             $dailyReports = $this->dailyReport->fetchSearchingQuestion($inputs)->paginate(DAILY_MAX_PAGE_COUNT); 
         } else {
-            $dailyReports = $this->dailyReport->orderby('created_at', 'desc')->paginate(DAILY_MAX_PAGE_COUNT); //なかったらcreated_atカラムの値を降順で表示 新しく作られた順
+            $dailyReports = $this->dailyReport->orderby('created_at', 'desc')->paginate(DAILY_MAX_PAGE_COUNT);
         }
 
-        return view('user.daily_report.index', compact('dailyReports', 'inputs')); //検索結果と検索条件をhtmlに返す
+        return view('user.daily_report.index', compact('dailyReports', 'inputs'));
     }
 
     /**
@@ -47,7 +46,6 @@ class DailyReportsController extends Controller
      */
     public function create()
     {
-        //
         return view('user.daily_report.create');
     }
 
@@ -57,11 +55,10 @@ class DailyReportsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(DailyReportRequest $request)  //Formから送られてきた値をDailyReportRequestでvalidateかけている
+    public function store(DailyReportRequest $request)
     {
-        //
         $input = $request->all();
-        $input['user_id'] = Auth::id(); //現在認証されているユーザーのIDを取得しuser_idに入れている これで認証済みユーザーへアクセスしている これをしないとユーザーidに何もないよとエラー出る
+        $input['user_id'] = Auth::id();
         $this->dailyReport->fill($input)->save();
         return redirect()->route('daily.index');
     }
@@ -74,7 +71,6 @@ class DailyReportsController extends Controller
      */
     public function show($id)
     {
-        //
         $reportShow = $this->dailyReport->find($id);
         $reportShow['user_id'] = Auth::id();        
         return view('user.daily_report.show', compact('reportShow'));
@@ -88,7 +84,6 @@ class DailyReportsController extends Controller
      */
     public function edit($id)
     {
-        //
         $reportEdit = $this->dailyReport->find($id);
         return view('user.daily_report.edit', compact('reportEdit'));
     }
@@ -102,7 +97,6 @@ class DailyReportsController extends Controller
      */
     public function update(DailyReportRequest $request, $id)
     {
-        //
         $input = $request->all();
         $input['user_id'] = Auth::id();
         $this->dailyReport->find($id)->fill($input)->save();
@@ -117,9 +111,7 @@ class DailyReportsController extends Controller
      */
     public function destroy($id)
     {
-        //
-        $dailyDelete = DailyReport::find($id); //ファサードの記法で書く DailyReportから$find()で取得したidのオブジェクトを取得
-        $dailyDelete->delete();
+        $this->dailyReport->find($id)->delete();
         return redirect()->route('daily.index');
     }
 }

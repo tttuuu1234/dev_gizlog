@@ -10,7 +10,7 @@ trait SearchingScope
      * @param string $columnName カラム名(検索条件名)
      *        string $conditionValue 検索条件の値
      */
-    public function scopeFilterEqual($query, $columnName, $conditionValue) //scopeが付いているのはクエリスコープ 使用するときはscopeを外す　完全一致検索
+    public function scopeFilterEqual($query, $columnName, $conditionValue)
     {
         if (!empty($conditionValue)) {
             $query->where($columnName, $conditionValue);
@@ -23,7 +23,7 @@ trait SearchingScope
      * @param string $columnName カラム名(検索条件名)
      *        string $conditionValue 検索条件の値
      */
-    public function scopeFilterLike($query, $columnName, $conditionValue) //曖昧検索
+    public function scopeFilterLike($query, $columnName, $conditionValue)
     {
         if (!empty($conditionValue)) {
             $query->where($columnName, 'LIKE', '%'.$conditionValue.'%');

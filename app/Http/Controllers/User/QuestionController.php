@@ -125,9 +125,9 @@ class QuestionController extends Controller
      * @param null $questionId
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function confirm(QuestionsRequest $request, $questionId = null) //createの際に初期値としてnullを設定していないとそんな引数はないとエラー出る
+    public function confirm(QuestionsRequest $request, $questionId = null)
     {
-        $inputs = $request->all(); // ただの連想配列だから値を取得するには[キー名]で値にアクセス
+        $inputs = $request->all();
         $category = $this->category->find($inputs['tag_category_id'])->name;
         return view('user.question.confirm', compact('inputs', 'category', 'questionId'));
     }
