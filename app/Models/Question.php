@@ -5,19 +5,24 @@ use App\Models\TagCategory;
 use App\Models\User;
 use App\Models\Comment;
 use App\Services\SearchingScope;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Carbon\Carbon;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Question extends Model
 {
-    use SearchingScope;
+    use SearchingScope, SoftDeletes;
 
     protected $fillable = [
         'user_id',
         'title',
         'content',
         'tag_category_id',
+    ];
+
+    protected $dates = [
+        'deleted_at',
     ];
 
     public function category()

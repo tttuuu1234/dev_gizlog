@@ -83,8 +83,9 @@ class QuestionController extends Controller
      */
     public function edit($id)
     {
-        $question = $this->question->find($id);
-        return view('user.question.edit', compact('question'));
+        $questions = $this->question->find($id);
+        $categories = $this->category->all();
+        return view('user.question.edit', compact('questions', 'categories'));
     }
 
     /**
@@ -96,7 +97,10 @@ class QuestionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $inputs = $request->all();
+        $this->question->find($id)->fill($inputs)->save();
+        return redirect()->route('question.index');
+
     }
 
     /**
@@ -107,7 +111,8 @@ class QuestionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->question->find($id)->delete();
+        return redirect()->route('question.index');
     }
 
     public function mypage()

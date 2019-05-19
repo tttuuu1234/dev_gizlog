@@ -25,16 +25,16 @@
     </div>
   </div>
     <div class="comment-list">
-        <div class="comment-wrap">
+      <div class="comment-wrap">
         @foreach ($question->comment as $comment)
           <div class="comment-title">
             <img src="{{ $comment->user->avatar }}" class="avatar-img">
             <p>{{ $comment->user->name }}</p>
             <p class="comment-date">{{ $comment->created_at }}</p>
           </div>
-          <div class="comment-body">{{ $comment->comment}}</div>
+          <div class="comment-body">{{ $comment->comment }}</div>
         @endforeach  
-        </div>
+      </div>
     </div>
   <div class="comment-box">
     {!! Form::open(['route' => 'question.comment']) !!}
