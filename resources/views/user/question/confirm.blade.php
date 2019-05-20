@@ -23,23 +23,17 @@
     </div>
   </div>
   <div class="btn-bottom-wrapper">
-  @if(isset($inputs['confilm']) ||$inputs['confirm'] == 'create')
-    {!! Form::open(['route' => 'question.store'])!!}
-      {!! Form::input('hidden', 'user_id', Auth::id()) !!}
-      {!! Form::input('hidden', 'tag_category_id', $question->tag_category_id) !!}
-      {!! Form::input('hidden', 'title', $question->title) !!}
-      {!! Form::input('hidden', 'content', $question->content) !!}
-      <button type="submit" class="btn btn-success"><i class="fa fa-check" aria-hidden="true"></i></button>
-    {!! Form::close() !!}  
-  @else
-    {!! Form::open(['route' => ['question.update', $question->id], 'method' => 'put']) !!}
-      {!! Form::input('hidden', 'user_id', Auth::id()) !!}
-      {!! Form::input('hidden', 'tag_category_id', $question->tag_category_id) !!}
-      {!! Form::input('hidden', 'title', $question->title) !!}
-      {!! Form::input('hidden', 'content', $question->content) !!}
-      <button type="submit" class="btn btn-success"><i class="fa fa-check" aria-hidden="true"></i></button>
-    {!! Form::close() !!}
-  @endif  
+    @if(isset($inputs['confilm']) ||$inputs['confirm'] == 'create')
+      {!! Form::open(['route' => 'question.store'])!!}
+    @else
+      {!! Form::open(['route' => ['question.update', $question->id], 'method' => 'put']) !!}
+    @endif  
+        {!! Form::input('hidden', 'user_id', Auth::id()) !!}
+        {!! Form::input('hidden', 'tag_category_id', $question->tag_category_id) !!}
+        {!! Form::input('hidden', 'title', $question->title) !!}
+        {!! Form::input('hidden', 'content', $question->content) !!}
+        <button type="submit" class="btn btn-success"><i class="fa fa-check" aria-hidden="true"></i></button>
+      {!! Form::close() !!}
   </div>
 </div>
 
