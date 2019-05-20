@@ -37,8 +37,14 @@ class QuestionController extends Controller
         $questions = $this->question->all();
         $categories = $this->category->all();
 
+        if(array_key_exists('search_word', $inputs)) {
+            $questions = $this->question->fetchSearchWordRecords($inputs);
+        } else {
+            $questions = $this->question->all();
+        }
+
         return view('user.question.index', compact('questions', 'categories', 'inputs'));
-    }
+    }    
 
     /**
      * Show the form for creating a new resource.
@@ -102,7 +108,6 @@ class QuestionController extends Controller
         $inputs = $request->all();
         $this->question->find($id)->fill($inputs)->save();
         return redirect()->route('question.index');
-
     }
 
     /**
@@ -130,4 +135,6 @@ class QuestionController extends Controller
         $comment = $this->comment->fill($inputs)->save();
         return redirect()->route('question.index');
     }
+
+    
 }

@@ -6,7 +6,11 @@
   {!! Form::open(['route' => 'question.index', 'method' => 'get']) !!}
     <div class="btn-wrapper">
       <div class="search-box">
-        <input class="form-control search-form" placeholder="Search words..." name="search_word" type="text">
+      @if(isset($inputs['search_word']))
+        {!!Form::input('text', 'search_word', $inputs['search_word'], ['class' => 'form-control search-form', 'placeholder' => 'Search words...'] )!!}
+      @else
+        {!!Form::input('text', 'search_word', null, ['class' => 'form-control search-form', 'placeholder' => 'Search words...'] )!!}
+      @endif  
         <button type="submit" class="search-icon"><i class="fa fa-search" aria-hidden="true"></i></button>
       </div>
       <a class="btn" href="{{ route('question.create') }}"><i class="fa fa-plus" aria-hidden="true"></i></a>
@@ -16,10 +20,16 @@
     </div>
     <div class="category-wrap">
       <div class="btn all" id="0">all</div>
-      @foreach ($categories as $category)
-        <div class="btn {{ $category->name }}" id="{{ $category->id }}">{{ $category->name }}</div>
-        {!! Form::input('hidden', 'tag_category_id', $category->id, ['id' => 'category-val']) !!}
-      @endforeach
+      @if(isset($inputs['tag_category_id']))
+        @foreach ($categories as $category)
+          <div class="btn {{ $category->name }} {{ $category->name }}-{{ $inputs['tag_category_id']}}" id="{{ $category->id }}">{{ $category->name }}</div>
+        @endforeach
+      @else
+        @foreach ($categories as $category)
+          <div class="btn {{ $category->name }} {{ $category->name }}-'' " id="{{ $category->id }}">{{ $category->name }}</div>
+        @endforeach
+      @endif
+      {!! Form::input('hidden', 'tag_category_id', '0', ['id' => 'category-val']) !!}
     </div>
   {!! Form::close() !!}
   <div class="content-wrapper table-responsive">
