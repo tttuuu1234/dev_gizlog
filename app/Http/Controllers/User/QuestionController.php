@@ -4,6 +4,8 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\User\QuestionsRequest;
+use App\Http\Requests\User\CommentRequest;
 use App\Models\Question;
 use App\Models\TagCategory;
 use App\Models\Comment;
@@ -55,7 +57,7 @@ class QuestionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(QuestionsRequest $request)
     {
         $inputs = $request->all();
         $this->question->fill($inputs)->save();
@@ -95,7 +97,7 @@ class QuestionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(QuestionsRequest $request, $id)
     {
         $inputs = $request->all();
         $this->question->find($id)->fill($inputs)->save();
@@ -122,7 +124,7 @@ class QuestionController extends Controller
         return view('user.question.mypage', compact('questions'));
     }
 
-    public function createComment(Request $request)
+    public function createComment(CommentRequest $request)
     {
         $inputs = $request->all();
         $comment = $this->comment->fill($inputs)->save();
