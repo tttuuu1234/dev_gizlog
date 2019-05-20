@@ -5,7 +5,7 @@
 
 <div class="main-wrap">
   <div class="container">
-    {!! Form::open(['route' => ['question.update', $questions->id], 'method' => 'put']) !!}
+    {!! Form::open(['route' => ['question.editConfirm', $questions->id]]) !!}
       {!! Form::input('hidden', 'user_id', Auth::id(), ['class' => 'form-control']) !!}
       <div class="form-group @if(!empty($errors->first('tag_category_id'))) has-error @endif">
 

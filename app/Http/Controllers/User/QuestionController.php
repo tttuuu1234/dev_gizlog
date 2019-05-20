@@ -136,5 +136,17 @@ class QuestionController extends Controller
         return redirect()->route('question.index');
     }
 
-    
+    public function confirm(QuestionsRequest $request)
+    {
+        $inputs = $request->all();
+        $question = $this->question->fill($inputs);
+        return view('user.question.confirm', compact('question', 'inputs'));
+    }
+
+    public function editConfirm(QuestionsRequest $request, $id)
+    {
+        $inputs = $request->all();
+        $question = $this->question->find($id)->fill($inputs);
+        return view('user.question.confirm', compact('question', 'inputs'));
+    }
 }

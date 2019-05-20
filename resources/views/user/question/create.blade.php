@@ -4,7 +4,7 @@
 <h2 class="brand-header">質問投稿</h2>
 <div class="main-wrap">
   <div class="container">
-    {!! Form::open([ 'route' => 'question.store' ]) !!}
+    {!! Form::open([ 'route' => 'question.confirm']) !!}
       {!! Form::input('hidden', 'user_id', Auth::id(), ['class' => 'form-control']) !!}
       <div class="form-group @if(!empty($errors->first('tag_category_id'))) has-error @endif">
         <select name='tag_category_id' class = "form-control selectpicker form-size-small" id="pref_id">
@@ -23,7 +23,7 @@
         {!! Form::textarea('content', old('content'), ['class' => 'form-control', 'placeholder' => 'Please write down your question here...'])!!}
         <span class="help-block">{{ $errors->first('content') }}</span>
       </div>
-      <input name="confirm" class="btn btn-success pull-right" type="submit" value="create">
+      {!! Form::input('submit', 'confirm', 'create', ['class' =>   'btn btn-success pull-right']) !!}
     {!! Form::close() !!}
   </div>
 </div>

@@ -49,13 +49,6 @@ class Question extends Model
                     ->get();
     }
 
-    public function fetchCategoryRecords($inputs)
-    {
-        return $this->filterEqual('tag_category_id', $inputs['tag_category_id'])
-                    ->orderby('created_at', 'desc')
-                    ->get();
-    }
-
     public function fetchSearchWordRecords($inputs)
     {
         return $this->filterLike('title', $inputs['search_word'])
