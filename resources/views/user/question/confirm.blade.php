@@ -23,7 +23,7 @@
     </div>
   </div>
   <div class="btn-bottom-wrapper">
-    @if(isset($inputs['confilm']) ||$inputs['confirm'] == 'create')
+    @if(isset($inputs['confilm']) || $inputs['confirm'] == 'create')
       {!! Form::open(['route' => 'question.store'])!!}
     @else
       {!! Form::open(['route' => ['question.update', $question->id], 'method' => 'put']) !!}

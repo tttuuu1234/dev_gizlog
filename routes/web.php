@@ -42,7 +42,7 @@ Route::group(['prefix' => '/', 'user.', 'namespace' => 'User'], function () {
     Route::get('question/mypage', ['as' => 'question.mypage', 'uses' => 'QuestionController@mypage']);
     Route::post('question/comment', ['as' => 'question.comment', 'uses' => 'QuestionController@createComment']);
     Route::post('question/confirm', ['as' => 'question.confirm', 'uses' => 'QuestionController@confirm']);
-    Route::post('question/{id}/editConfirm', ['as' => 'question.editConfirm', 'uses' => 'QuestionController@editConfirm']);
+    Route::post('question/{id}/confirm', ['as' => 'question.confirm.update', 'uses' => 'QuestionController@confirm']);
     Route::resource('question', QuestionController::class);
     Route::resource('report', DailyReportController::class);
 

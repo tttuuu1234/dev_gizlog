@@ -37,10 +37,11 @@ class QuestionController extends Controller
         $questions = $this->question->all();
         $categories = $this->category->all();
 
+        
         if(array_key_exists('search_word', $inputs)) {
             $questions = $this->question->fetchSearchWordRecords($inputs);
         } else {
-            $questions = $this->question->all();
+            $questions = $this->question->orderby('created_at', 'desc')->get();
         }
 
         return view('user.question.index', compact('questions', 'categories', 'inputs'));
@@ -132,21 +133,18 @@ class QuestionController extends Controller
     public function createComment(CommentRequest $request)
     {
         $inputs = $request->all();
-        $comment = $this->comment->fill($inputs)->save();
+        $this->comment->fill($inputs)->save();
         return redirect()->route('question.index');
     }
 
-    public function confirm(QuestionsRequest $request)
+    public function confirm(QuestionsRequest $request, $id = null)
     {
         $inputs = $request->all();
-        $question = $this->question->fill($inputs);
-        return view('user.question.confirm', compact('question', 'inputs'));
-    }
-
-    public function editConfirm(QuestionsRequest $request, $id)
-    {
-        $inputs = $request->all();
-        $question = $this->question->find($id)->fill($inputs);
+        if($id == null){
+            $question = $this->question->fill($inputs);
+        } else {
+            $question = $this->question->find($id)->fill($inputs);
+        }
         return view('user.question.confirm', compact('question', 'inputs'));
     }
 }
