@@ -80,7 +80,7 @@ class QuestionController extends Controller
     public function show($id)
     {
         $question = $this->question->find($id);
-        $comment = $this->comment->find($id);
+        $this->comment->find($id);
         return view('user.question.show', compact('question'));
     }
 
